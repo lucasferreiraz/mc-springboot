@@ -1,14 +1,9 @@
 package io.lucasprojects.mcspringboot;
 
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import io.lucasprojects.mcspringboot.domain.Categoria;
-import io.lucasprojects.mcspringboot.domain.Produto;
 import io.lucasprojects.mcspringboot.repositories.CategoriaRepository;
 import io.lucasprojects.mcspringboot.repositories.ProdutoRepository;
 
