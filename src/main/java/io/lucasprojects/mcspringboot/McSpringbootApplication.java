@@ -27,7 +27,7 @@ public class McSpringbootApplication /*implements CommandLineRunner*/ {
 	
 	/*
 	 * 
-	 * Alimentei e fiz as relações de forma provisória no banco
+	 * Alimentei e fiz as relações de forma provisória no banco 
 	 * 
 	@Override
 	public void run(String... args) throws Exception {

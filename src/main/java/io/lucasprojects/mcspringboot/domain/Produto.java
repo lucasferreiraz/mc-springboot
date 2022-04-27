@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 	
 @Entity
 public class Produto {
@@ -22,6 +24,7 @@ public class Produto {
 	
 	private Double preco;
 	
+	@JsonBackReference
 	@ManyToMany
 	@JoinTable(
 			name = "produtoCategoria",
