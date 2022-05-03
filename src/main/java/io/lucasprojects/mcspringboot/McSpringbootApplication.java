@@ -9,10 +9,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import io.lucasprojects.mcspringboot.domain.Categoria;
 import io.lucasprojects.mcspringboot.domain.Cidade;
+import io.lucasprojects.mcspringboot.domain.Cliente;
+import io.lucasprojects.mcspringboot.domain.Endereco;
 import io.lucasprojects.mcspringboot.domain.Estado;
 import io.lucasprojects.mcspringboot.domain.Produto;
+import io.lucasprojects.mcspringboot.domain.enums.TipoCliente;
 import io.lucasprojects.mcspringboot.repositories.CategoriaRepository;
 import io.lucasprojects.mcspringboot.repositories.CidadeRepository;
+import io.lucasprojects.mcspringboot.repositories.ClienteRepository;
+import io.lucasprojects.mcspringboot.repositories.EnderecoRepository;
 import io.lucasprojects.mcspringboot.repositories.EstadoRepository;
 import io.lucasprojects.mcspringboot.repositories.ProdutoRepository;
 
@@ -31,6 +36,12 @@ public class McSpringbootApplication /*implements CommandLineRunner*/ {
 	@Autowired
 	CidadeRepository cidadeRepository;
 
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	@Autowired
+	EnderecoRepository enderecoRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(McSpringbootApplication.class, args);
 	}
@@ -70,7 +81,19 @@ public class McSpringbootApplication /*implements CommandLineRunner*/ {
 		estadoRepository.saveAll(Arrays.asList(est1, est2));
 		cidadeRepository.saveAll(Arrays.asList(c1, c2, c3));
 		
+		Cliente cli1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "38163810275", TipoCliente.PESSOAFISICA);
 		
-	}
-	*/
+		cli1.getTelefones().addAll(Arrays.asList("40028922","33016753"));
+		
+		Endereco e1 = new Endereco(null, "Rua Flores", "300", "Apto 303", "Jardim", "48251339", cli1, c1);
+		Endereco e2 = new Endereco(null, "Av Matos", "105", "Sala 663", "Centro", "42221339", cli1, c2);
+		
+		cli1.getEnderecos().addAll(Arrays.asList(e1, e2));
+		
+		clienteRepository.saveAll(Arrays.asList(cli1));
+		enderecoRepository.saveAll(Arrays.asList(e1, e2));
+		
+		
+	}*/
+	
 }
