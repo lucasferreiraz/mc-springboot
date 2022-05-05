@@ -1,0 +1,27 @@
+package io.lucasprojects.mcspringboot.services;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import io.lucasprojects.mcspringboot.domain.Cliente;
+import io.lucasprojects.mcspringboot.repositories.ClienteRepository;
+import io.lucasprojects.mcspringboot.services.exceptions.ObjectNotFoundException;
+
+@Service
+public class ClienteService {
+
+	@Autowired
+	ClienteRepository clienteRepository;
+	
+	public Cliente buscar(Integer id) {
+		
+		Optional<Cliente> cliente = clienteRepository.findById(id);
+		
+		return cliente.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado, Id: " + id 
+				+ " Tipo: " + Cliente.class.getName()));
+		
+	}
+	
+}

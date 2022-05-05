@@ -7,23 +7,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import io.lucasprojects.mcspringboot.domain.Categoria;
-import io.lucasprojects.mcspringboot.services.CategoriaService;
+import io.lucasprojects.mcspringboot.domain.Cliente;
+import io.lucasprojects.mcspringboot.services.ClienteService;
 
 @RestController
-@RequestMapping(path = "/categorias")
-public class CategoriaResource {
+@RequestMapping(path = "/clientes")
+public class ClienteResource {
 	
 	@Autowired
-	CategoriaService categoriaService;
+	ClienteService clienteService;
 	
 	@GetMapping(path = "/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		
-		Categoria categoria = categoriaService.buscar(id);
+		Cliente cliente = clienteService.buscar(id);
 		
-		return ResponseEntity.ok().body(categoria);
+		return ResponseEntity.ok().body(cliente);
 	}
 	
 }
-

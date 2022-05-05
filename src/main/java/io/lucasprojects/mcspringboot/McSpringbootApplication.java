@@ -1,5 +1,6 @@
 package io.lucasprojects.mcspringboot;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +13,24 @@ import io.lucasprojects.mcspringboot.domain.Cidade;
 import io.lucasprojects.mcspringboot.domain.Cliente;
 import io.lucasprojects.mcspringboot.domain.Endereco;
 import io.lucasprojects.mcspringboot.domain.Estado;
+import io.lucasprojects.mcspringboot.domain.Pagamento;
+import io.lucasprojects.mcspringboot.domain.PagamentoComBoleto;
+import io.lucasprojects.mcspringboot.domain.PagamentoComCartao;
+import io.lucasprojects.mcspringboot.domain.Pedido;
 import io.lucasprojects.mcspringboot.domain.Produto;
+import io.lucasprojects.mcspringboot.domain.enums.EstadoPagamento;
 import io.lucasprojects.mcspringboot.domain.enums.TipoCliente;
 import io.lucasprojects.mcspringboot.repositories.CategoriaRepository;
 import io.lucasprojects.mcspringboot.repositories.CidadeRepository;
 import io.lucasprojects.mcspringboot.repositories.ClienteRepository;
 import io.lucasprojects.mcspringboot.repositories.EnderecoRepository;
 import io.lucasprojects.mcspringboot.repositories.EstadoRepository;
+import io.lucasprojects.mcspringboot.repositories.PagamentoRepository;
+import io.lucasprojects.mcspringboot.repositories.PedidoRepository;
 import io.lucasprojects.mcspringboot.repositories.ProdutoRepository;
 
 @SpringBootApplication
-public class McSpringbootApplication /*implements CommandLineRunner*/ {
+public class McSpringbootApplication implements CommandLineRunner {
 	
 	@Autowired
 	CategoriaRepository categoriaRepository;
@@ -42,11 +50,17 @@ public class McSpringbootApplication /*implements CommandLineRunner*/ {
 	@Autowired
 	EnderecoRepository enderecoRepository;
 	
+	@Autowired
+	PedidoRepository pedidoRepository;
+	
+	@Autowired
+	PagamentoRepository pagamentoRepository;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(McSpringbootApplication.class, args);
 	}
 	
-	/*
+	
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -94,6 +108,22 @@ public class McSpringbootApplication /*implements CommandLineRunner*/ {
 		enderecoRepository.saveAll(Arrays.asList(e1, e2));
 		
 		
-	}*/
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy hh:mm");
+		
+		Pedido ped1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cli1, e1);
+		Pedido ped2 = new Pedido(null, sdf.parse("10/10/2017 19:32"), cli1, e2);
+		
+		Pagamento pagto1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, ped1, 6);
+		ped1.setPagamento(pagto1);
+		
+		Pagamento pagto2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, ped2, sdf.parse("20/10/2017 00:00"), null);
+		ped2.setPagamento(pagto2);
+		
+		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
+		
+		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		
+	}
 	
 }

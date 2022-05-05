@@ -7,6 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Endereco {
 
@@ -19,7 +21,7 @@ public class Endereco {
 	private String bairro;
 	private String cep;
 	
-	
+	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "clienteId")
 	private Cliente cliente;
@@ -28,6 +30,10 @@ public class Endereco {
 	@JoinColumn(name = "cidadeId")
 	private Cidade cidade;
 
+	public Endereco() {
+		
+	}
+	
 	public Endereco(Integer id, String logradouro, String numero, String complemento, String bairro, String cep,
 			Cliente cliente, Cidade cidade) {
 		super();
