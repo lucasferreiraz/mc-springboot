@@ -30,7 +30,7 @@ import io.lucasprojects.mcspringboot.repositories.PedidoRepository;
 import io.lucasprojects.mcspringboot.repositories.ProdutoRepository;
 
 @SpringBootApplication
-public class McSpringbootApplication implements CommandLineRunner {
+public class McSpringbootApplication /*implements CommandLineRunner*/ {
 	
 	@Autowired
 	CategoriaRepository categoriaRepository;
@@ -60,7 +60,7 @@ public class McSpringbootApplication implements CommandLineRunner {
 		SpringApplication.run(McSpringbootApplication.class, args);
 	}
 	
-	
+	/*
 	@Override
 	public void run(String... args) throws Exception {
 		
@@ -122,8 +122,8 @@ public class McSpringbootApplication implements CommandLineRunner {
 		cli1.getPedidos().addAll(Arrays.asList(ped1, ped2));
 		
 		pedidoRepository.saveAll(Arrays.asList(ped1, ped2));
-		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2));
+		pagamentoRepository.saveAll(Arrays.asList(pagto1, pagto2)); 
 		
 	}
-	
+	*/
 }
